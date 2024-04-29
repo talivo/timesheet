@@ -37,6 +37,7 @@
                     <option value="horeca">Restaurants en cafes</option>
                     <option value="techniek">Technische dienst</option>
                     <option value="groen">Groenbeheer</option>
+                    <option value="service">Klantenservice</option>
                     <option value="humanresources">Personeel en HR</option>
                     <option value="inkoop">Inkoop</option>
                 </select>

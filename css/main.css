@@ -394,3 +394,12 @@ th, td{
   }
 }
 
+.logs-en-filter{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.logs-en-filter select{
+  width: 175px;
+}

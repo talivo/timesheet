@@ -25,11 +25,37 @@
 
         <?php
         require_once '../backend/conn.php';
-        $query = "SELECT * FROM logs ORDER BY date DESC";
-        $statement = $conn->prepare($query);
-        $statement->execute();
+        if(empty($_GET['department'])) {
+            $query = "SELECT * FROM logs ORDER BY date DESC";
+            $statement = $conn->prepare($query);
+            $statement->execute();
+        } else {
+            $query = "SELECT * FROM logs WHERE department = :department ORDER BY date DESC ";
+            $statement = $conn->prepare($query);
+            $statement->execute([
+                ':department'=> $_GET['department']
+            ]);            
+        }
         $logs = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
+
+        <div class="logs-en-filter">
+            <p>Aantal logs: <strong><?php echo count($logs); ?></strong></p>
+            <form method="GET">
+                <select name="department" id="department">
+                    <option value="">- filter op adfeling -</option>
+                    <option value="attracties">Attracties (gastheer/gastvrouw)</option>
+                    <option value="horeca">Restaurants en cafes</option>
+                    <option value="techniek">Technische dienst</option>
+                    <option value="groen">Groenbeheer</option>
+                    <option value="service">Klantenservice</option>
+                    <option value="humanresources">Personeel en HR</option>
+                    <option value="inkoop">Inkoop</option>
+                </select>
+                <input type="submit" value="filter">
+            </form>
+        </div>
+
 
         <table>
             <tr>
